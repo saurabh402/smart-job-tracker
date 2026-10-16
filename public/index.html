@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Job Tracker - Organize Your Career Journey</title>
+    <meta name="description" content="Effortlessly track your job applications, interviews, and offers in one beautiful, centralized dashboard.">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        nav {
+            min-height: 72px;
+            background: var(--bg-surface);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-600);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-600);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            background: var(--bg-muted);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn-outline {
+            text-decoration: none;
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border-strong);
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn-primary {
+            text-decoration: none;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 90px 8% 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .hero-left {
+            flex: 1;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-50);
+            color: var(--primary-600);
+            border: 1px solid var(--primary-100);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 4.5vw, 60px);
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 540px;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Hero preview mock */
+        .hero-preview {
+            flex: 1;
+            max-width: 520px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-xl);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .preview-header span {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .preview-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .preview-stat {
+            background: var(--bg-muted);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .preview-stat .num {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-600);
+        }
+
+        .preview-stat .lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .preview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preview-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--bg-muted);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .tag-interview { background: var(--purple-bg); color: var(--purple-text); border: 1px solid var(--purple-border); }
+        .tag-selected { background: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border); }
+        .tag-applied { background: var(--info-bg); color: var(--info-text); border: 1px solid var(--info-border); }
+
+        /* Features */
+        .features-section {
+            padding: 90px 8%;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-tag {
+            color: var(--primary-600);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 14px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: var(--bg-page);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-focus);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--primary-50);
+            color: var(--primary-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 35px 8%;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 50px 6%;
+            }
+            .hero p { margin: 0 auto 30px; }
+            .hero-cta { justify-content: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="brand">
+            <div class="brand-icon">💼</div>
+            Smart Job Tracker
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="dashboard.html">Live Dashboard</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="theme-toggle" id="darkToggleBtn" onclick="toggleDarkMode()" title="Toggle Dark/Light Mode">🌙</button>
+            <a href="login.html" class="btn-outline" id="navLoginBtn">Sign In</a>
+            <a href="signup.html" class="btn-primary" id="navSignupBtn">Get Started</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-left">
+                <div class="pill">✨ Full-Stack MongoDB & Express Tracker</div>
+                <h1>Take control of your <br><span class="highlight">Job Hunt Pipeline</span></h1>
+                <p>Never lose track of an application, interview stage, recruiter note, or offer again. Built for fast, modern job hunting with instant search and status pipelines.</p>
+                
+                <div class="hero-cta">
+                    <a href="dashboard.html" class="btn-primary" style="padding: 14px 28px; font-size: 16px;">
+                        Open Dashboard ➔
+                    </a>
+                    <a href="signup.html" class="btn-outline" style="padding: 14px 24px; font-size: 16px;">
+                        Create Free Account
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-preview">
+                <div class="preview-header">
+                    <span>⚡ Application Pipeline</span>
+                    <span style="color: var(--primary-600); font-size: 12px; font-weight: 700;">LIVE PREVIEW</span>
+                </div>
+
+                <div class="preview-stat-grid">
+                    <div class="preview-stat">
+                        <div class="num">18</div>
+                        <div class="lbl">TOTAL</div>
+                    </div>
+                    <div class="preview-stat">
+                        <div class="num" style="color: #8b5cf6;">4</div>
+                        <div class="lbl">INTERVIEWS</div>
+                    </div>
+                    <div class="preview-stat">
+                        <div class="num" style="color: #10b981;">2</div>
+                        <div class="lbl">OFFERS</div>
+                    </div>
+                </div>
+
+                <div class="preview-list">
+                    <div class="preview-row">
+                        <div>
+                            <strong>Google</strong>
+                            <div style="color: var(--text-muted); font-size: 11px;">Software Engineer • Full Time</div>
+                        </div>
+                        <span class="tag tag-interview">🎤 Round 2</span>
+                    </div>
+
+                    <div class="preview-row">
+                        <div>
+                            <strong>Microsoft</strong>
+                            <div style="color: var(--text-muted); font-size: 11px;">Data Scientist • Remote</div>
+                        </div>
+                        <span class="tag tag-selected">🎉 Selected</span>
+                    </div>
+
+                    <div class="preview-row">
+                        <div>
+                            <strong>Stripe</strong>
+                            <div style="color: var(--text-muted); font-size: 11px;">Backend Developer • Bangalore</div>
+                        </div>
+                        <span class="tag tag-applied">📝 Applied</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section" id="features">
+            <div class="features-container">
+                <div class="section-tag">Everything You Need</div>
+                <h2 class="section-title">Designed for Serious Job Seekers</h2>
+                <p class="section-desc">Streamlined, connected to MongoDB, responsive, and persistent across devices.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-Time Metrics</h3>
+                        <p>Instant breakdown of total applications, active interview schedules, offers, and rejection ratios.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Instant Filtering & Search</h3>
+                        <p>Search across company names and roles effortlessly, or filter down by specific pipeline status in milliseconds.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎤</div>
+                        <h3>Interview Stage Details</h3>
+                        <p>Store round type (Technical, HR, Managerial), interview modes (Google Meet, Zoom), date/time, and prep notes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure Authentication</h3>
+                        <p>Encrypted password storage with bcrypt and persistent JWT session tokens for clean, private data access.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌙</div>
+                        <h3>Adaptive Dark Mode</h3>
+                        <p>Full support for sleek dark mode designed for low eye strain during late-night application sessions.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>MongoDB Backend Sync</h3>
+                        <p>Reliable REST API endpoints supporting full CRUD operations connected directly to your MongoDB database.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Smart Job Tracker. Built with Node.js, Express & MongoDB.</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script>
+        // Adjust navigation links based on user login state
+        if (API.isLoggedIn()) {
+            const user = API.getUser();
+            const loginBtn = document.getElementById("navLoginBtn");
+            const signupBtn = document.getElementById("navSignupBtn");
+            if (loginBtn) {
+                loginBtn.textContent = user ? user.name : "My Dashboard";
+                loginBtn.href = "dashboard.html";
+            }
+            if (signupBtn) {
+                signupBtn.textContent = "Dashboard ➔";
+                signupBtn.href = "dashboard.html";
+            }
+        }
+    </script>
+</body>
+</html>

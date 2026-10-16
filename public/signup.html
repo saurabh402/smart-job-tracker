@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Smart Job Tracker</title>
+    <meta name="description" content="Sign up for Smart Job Tracker to organize and accelerate your job applications.">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.08), transparent 70%), var(--bg-page);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .logo-wrap {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-600);
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 19px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        .auth-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 38px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .auth-title {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-page);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--border-focus);
+            background: var(--bg-surface);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .submit-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .auth-footer a {
+            color: var(--primary-600);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-float {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-float" id="darkToggleBtn" onclick="toggleDarkMode()" title="Toggle Dark/Light Mode">🌙</button>
+
+    <div class="auth-container">
+        <div class="logo-wrap">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">💼</div>
+                Smart Job Tracker
+            </a>
+        </div>
+
+        <div class="auth-card">
+            <h1 class="auth-title">Create Account</h1>
+            <p class="auth-subtitle">Join now to organize and track your job pipeline</p>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password (min 6 chars)</label>
+                    <input type="password" id="password" placeholder="••••••••" minlength="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="••••••••" minlength="6" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="signupBtn">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        const form = document.getElementById("signupForm");
+        const signupBtn = document.getElementById("signupBtn");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                showToast("Passwords do not match.", "error");
+                return;
+            }
+
+            signupBtn.disabled = true;
+            signupBtn.textContent = "Creating Account...";
+
+            try {
+                const res = await API.register(name, email, password);
+                API.setAuth(res.user, res.token);
+                showToast("Account created successfully! Redirecting...", "success");
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 800);
+            } catch (err) {
+                showToast(err.message || "Failed to create account.", "error");
+                signupBtn.disabled = false;
+                signupBtn.textContent = "Create Account";
+            }
+        });
+    </script>
+</body>
+</html>
